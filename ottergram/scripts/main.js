@@ -79,4 +79,26 @@ function initializeEvents() {
     addKeyPressHandler();
 }
 
+var currentSlide = 0;
+const slides = document.querySelectorAll(THUMBNAIL_LINK_SELECTOR)
+
+const init = (n) => {
+    setDetailsFromThumb(slides[n]);
+}
+document.addEventListener("DOMContentLoaded", init(currentSlide))
+
+
+const next = () => {
+    currentSlide >= slides.length - 1 ? currentSlide = 0 : currentSlide++
+    init(currentSlide)
+}
+
+const prev = () => {
+    currentSlide <= 0 ? currentSlide = slides.length - 1 : currentSlide--
+    init(currentSlide)
+}
+
+document.querySelector(".next").addEventListener('click', next)
+document.querySelector(".prev").addEventListener('click', prev)
+
 initializeEvents();
